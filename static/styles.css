@@ -1,0 +1,230 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1, h2 {
+    margin: 0 0 20px;
+    font-weight: 400;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px 0;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background-color: #004494;
+    transform: translateY(0);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin: 10px 0 5px;
+}
+
+select {
+    appearance: none;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    text-align: center; /* Center the text */
+    text-align-last: center; /* Center the text for the last line */
+}
+
+select#play-type {
+    max-width: 150px; /* Adjust the max-width for play-type */
+    padding: 15px 10px; /* Increase height by adjusting padding */
+    margin-bottom: 20px; /* Add space between play-type and other selectors */
+    font-size: 24px; /* Increase font size for play-type */
+}
+
+select.player-select {
+    border-radius: 5px; /* Make the player-select buttons not rounded */
+    flex-grow: 1; /* Allow the select to grow */
+    max-width: none; /* Remove max-width to allow flex-grow to work */
+    font-size: 24px;
+}
+
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+select.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.player-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the content horizontally */
+    margin-bottom: 10px;
+    width: 90%; /* Ensure the container takes full width */
+}
+
+.toggle-button {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+.player-select.toggled {
+    background-color: #e0f7fa; /* Slightly color the player button */
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    max-width: 300px;
+    font-size: 20px; /* Increase font size for better readability */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.radio-group p {
+    margin: 0 0 5px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.radio-label:hover {
+    background-color: #e0e0e0;
+}
+
+.radio-label input[type="radio"] {
+    display: none;
+}
+
+.radio-label input[type="radio"]:checked + span {
+    color: #ff6e00;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.radio-label span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.custom-alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #80e177;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.custom-alert.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        padding: 20px; /* Increase padding for better touch targets */
+    }
+
+    button {
+        width: 100%;
+        margin: 15px 0; /* Increase margin for better spacing */
+        padding: 20px; /* Increase padding for better touch targets */
+        font-size: 20px; /* Increase font size for readability */
+    }
+
+    select {
+        width: 100%;
+        padding: 15px; /* Increase padding for better touch targets */
+        font-size: 18px; /* Increase font size for readability */
+    }
+}

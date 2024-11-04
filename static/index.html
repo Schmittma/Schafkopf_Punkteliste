@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Setup</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gut Blatt!</h1>
+        <div id="player-selection">
+            <h2>Anzahl Spieler</h2>
+            <button onclick="showPlayersScreen(3)">3 Spieler</button>
+            <button onclick="showPlayersScreen(4)">4 Spieler</button>
+        </div>
+        <div id="player-names" style="display: none;">
+            <form id="player-form" onsubmit="showWinConditionPopup(event)">
+                <div id="player1-container" class="player-container" style="display: none;">
+                    <img src="static/img/Kreuz.png" class="toggle-button" onclick="togglePlayerState(1)">
+                    <select id="player1" class="player-select" name="player1"></select>
+                </div>
+                <div id="player2-container" class="player-container" style="display: none;">
+                    <img src="static/img/Pik.png" class="toggle-button" onclick="togglePlayerState(2)">
+                    <select id="player2" class="player-select" name="player2"></select>
+                </div>
+                <div id="player3-container" class="player-container" style="display: none;">
+                    <img src="static/img/Herz.png" class="toggle-button" onclick="togglePlayerState(3)">
+                    <select id="player3" class="player-select" name="player3"></select>
+                </div>
+                <div id="player4-container" class="player-container" style="display: none;">
+                    <img src="static/img/Schellen.png" class="toggle-button" onclick="togglePlayerState(4)">
+                    <select id="player4" class="player-select" name="player4"></select>
+                </div>
+                <select id="play-type" name="play-type" onchange="updatePlayType()">
+                </select>
+                <button type="submit">Ergebnis Eintragen</button>
+            </form>
+        </div>
+    </div>
+    <div id="win-condition-popup" class="popup" style="display: none;" onclick="closePopup(event)">
+        <div class="popup-content" onclick="event.stopPropagation()">
+            <div class="radio-group">
+                <p>Gewinner</p>
+                <label for="spieler" class="radio-label">
+                    <input type="radio" id="spieler" name="winner" value="Spieler" checked>
+                    <span>Spieler</span>
+                </label>
+                <label for="nicht-spieler" class="radio-label">
+                    <input type="radio" id="nicht-spieler" name="winner" value="Nicht-Spieler">
+                    <span>Nicht-Spieler</span>
+                </label>
+            </div>
+            <div class="radio-group" style="margin-top: 10px">
+                <p>Bedingung</p>
+                <label for="normal" class="radio-label">
+                    <input type="radio" id="normal" name="wincondition" value="Normal" checked>
+                    <span>Normal</span>
+                </label>
+                <label for="schneider" class="radio-label">
+                    <input type="radio" id="schneider" name="wincondition" value="Schneider">
+                    <span>Schneider</span>
+                </label>
+                <label for="schwarz" class="radio-label">
+                    <input type="radio" id="schwarz" name="wincondition" value="Schwarz">
+                    <span>Schwarz</span>
+                </label>
+            </div>
+            <button onclick="submitForm()">Confirm</button>
+        </div>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>

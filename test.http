@@ -1,0 +1,18 @@
+POST http://localhost:5000/gspielt
+Content-Type: application/json
+
+{
+    "play": "Ruf",
+    "winner": "Spieler",
+    "wincondition": "",
+    "participants": [
+        {"name": "Peter", "is_player": true},
+        {"name": "Tim", "is_player": true},
+        {"name": "Marius", "is_player": false},
+        {"name": "Jonas", "is_player": false}
+    ]
+}
+
+###
+
+GET http://localhost:5000/users

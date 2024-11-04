@@ -1,0 +1,19 @@
+
+Rest API format
+
+/users
+
+/gspielt
+
+4 Spieler Spiel:
+{
+    "play": "Play description",
+    "winner": "Winner name",
+    "wincondition": "Win condition",
+    "participants": [
+        {"name": "Player 1 name", "is_player": true},
+        {"name": "Player 2 name", "is_player": true},
+        {"name": "Non-player 1 name", "is_player": false},
+        {"name": "Non-player 2 name", "is_player": false}
+    ]
+}

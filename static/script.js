@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // ----------------- Handle the player state information -----------------
 
 function togglePlayerState(playerNum) {
-    // Only 2 players can be players in a 4 player game
-    // Only 1 player can be a player in a 3 player game
+    // Only 2 players can be players in a Ruf
+    // Only 1 player can be a player in a Solo
     if (!playerIsPlayer[playerNum - 1] &&
         (playerIsPlayer.filter(p => p).length >= maxAllowedPlayers)) {
         return;
@@ -154,10 +154,48 @@ function closePopup(event) {
     }
 }
 
+/*
+    Depending on whether Ramsch is selected, we need to show different win conditions
+    For Ruf and Solo we always show the "ruf-solo-wincondition" radio group.
+     
+    For Ramsch, if the "non-players" win, we show the "ramsch-wincondition" radio group.
+    Otherwise, if the "player" wins, there is no further modification to the win condition. 
+*/
 function showWinConditionPopup(event) {
     event.preventDefault();
     if(playerIsPlayer.filter(p => p).length === maxAllowedPlayers) {
+
+        const playType = document.getElementById('play-type').value;
+
+        // Initially assume non-players win for ramsch
+        if (playType === 'Ramsch') {
+            document.getElementById('ramsch-wincondition__normal').checked = true;
+            document.getElementById('wincondition__nicht-spieler').checked = true;
+            document.getElementById('ruf-solo-wincondition').style.display = 'none';
+            document.getElementById('ramsch-wincondition').style.display = 'flex';
+        }
+        else {
+            document.getElementById('ruf-solo-wincondition__normal').checked = true;
+            document.getElementById('wincondition__spieler').checked = true;
+            document.getElementById('ruf-solo-wincondition').style.display = 'flex';
+            document.getElementById('ramsch-wincondition').style.display = 'none';
+        }
+
         document.getElementById('win-condition-popup').style.display = 'block';
+    }
+}
+
+/*
+    Only required for Ramsch.
+    If the non-players win, we need to show the "ramsch-wincondition" radio group. 
+    Otherwise we hide it.
+*/
+function handleChangeWinningPlayer(event) {
+    const playType = document.getElementById('play-type').value;
+    if ((playType === 'Ramsch') && (event.target.value === 'nicht-spieler')) {
+        document.getElementById('ramsch-wincondition').style.display = 'flex';
+    } else {
+        document.getElementById('ramsch-wincondition').style.display = 'none';
     }
 }
 
@@ -165,13 +203,23 @@ function showWinConditionPopup(event) {
     Get the data from the buttons and send it to the server. 
     Called when the win condition popup is submitted.
 
-    The data is sent in the following format:
-
+    See the README for the data structure that is sent to the server.
 */
 function submitForm(event) {
     const playType = document.getElementById('play-type').value;
-    const winCondition = document.querySelector('input[name="wincondition"]:checked').value;
+    
+    let winCondition = null;
     const winner = document.querySelector('input[name="winner"]:checked').value;
+
+    if(playType === "Ruf" || playType === "Solo") {
+        winCondition = document.querySelector('input[name="ruf-solo-wincondition"]:checked').value;
+    } else if(winner === "nicht-spieler") {
+        winCondition = document.querySelector('input[name="ramsch-wincondition"]:checked').value;
+    } else {
+        winCondition = "normal";
+    }
+
+
     const participants = [];
 
     let valid = true;

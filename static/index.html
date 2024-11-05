@@ -42,27 +42,38 @@
         <div class="popup-content" onclick="event.stopPropagation()">
             <div class="radio-group">
                 <p>Gewinner</p>
-                <label for="spieler" class="radio-label">
-                    <input type="radio" id="spieler" name="winner" value="spieler" checked>
+                <label for="wincondition__spieler" class="radio-label">
+                    <input type="radio" id="wincondition__spieler" name="winner" value="spieler" onchange="handleChangeWinningPlayer(event)" checked>
                     <span>Spieler</span>
                 </label>
-                <label for="nicht-spieler" class="radio-label">
-                    <input type="radio" id="nicht-spieler" name="winner" value="nicht-spieler">
+                <label for="wincondition__nicht-spieler" class="radio-label">
+                    <input type="radio" id="wincondition__nicht-spieler" name="winner" value="nicht-spieler" onchange="handleChangeWinningPlayer(event)">
                     <span>Nicht-Spieler</span>
                 </label>
             </div>
-            <div class="radio-group" style="margin-top: 10px">
+            <div class="radio-group" id="ramsch-wincondition" style="margin-top: 10px">
                 <p>Bedingung</p>
-                <label for="normal" class="radio-label">
-                    <input type="radio" id="normal" name="wincondition" value="normal" checked>
+                <label for="ramsch-wincondition__normal" class="radio-label">
+                    <input type="radio" id="ramsch-wincondition__normal" name="ramsch-wincondition" value="normal" checked>
                     <span>Normal</span>
                 </label>
-                <label for="schneider" class="radio-label">
-                    <input type="radio" id="schneider" name="wincondition" value="schneider">
+                <label for="ramsch-wincondition__jungfrau" class="radio-label">
+                    <input type="radio" id="ramsch-wincondition__jungfrau" name="ramsch-wincondition" value="jungfrau">
+                    <span>Jungfrau</span>
+                </label>
+            </div>
+            <div class="radio-group" id="ruf-solo-wincondition" style="margin-top: 10px">
+                <p>Bedingung</p>
+                <label for="ruf-solo-wincondition__normal" class="radio-label">
+                    <input type="radio" id="ruf-solo-wincondition__normal" name="ruf-solo-wincondition" value="normal" checked>
+                    <span>Normal</span>
+                </label>
+                <label for="ruf-solo-wincondition__schneider" class="radio-label">
+                    <input type="radio" id="ruf-solo-wincondition__schneider" name="ruf-solo-wincondition" value="schneider">
                     <span>Schneider</span>
                 </label>
-                <label for="schwarz" class="radio-label">
-                    <input type="radio" id="schwarz" name="wincondition" value="schwarz">
+                <label for="ruf-solo-wincondition__schwarz" class="radio-label">
+                    <input type="radio" id="ruf-solo-wincondition__schwarz" name="ruf-solo-wincondition" value="schwarz">
                     <span>Schwarz</span>
                 </label>
             </div>

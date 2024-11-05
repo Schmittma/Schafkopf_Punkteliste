@@ -3,6 +3,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from pytz import timezone
 from datetime import datetime 
+from server_config import SERVER_CONFIG 
 
 app = Flask(__name__, static_folder='static')
 
@@ -12,7 +13,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", sco
 client = gspread.authorize(creds)
 
 # Open the Google Sheet by ID and access the specific worksheets by name
-spreadsheet = client.open_by_key("1zvGxUAn3EWYJJ0vuKMNXbLlkkkTPtY6TxvWuYRL9D2Y")
+spreadsheet = client.open_by_key(SERVER_CONFIG["spreadsheet_id"])
 config_sheet = spreadsheet.worksheet("Konfiguration")
 playsheet_4p = spreadsheet.worksheet("Spielhistorie 4P")
 playsheet_3p = spreadsheet.worksheet("Spielhistorie 3P")

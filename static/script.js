@@ -1,7 +1,10 @@
+// ----------------- Global variables -----------------
 let globalNumPlayers = 0;
 let maxAllowedPlayers = 0;
 let playerIsPlayer = [false, false, false, false];
 
+
+// ----------------- Handle DOM Loaded -----------------
 document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
@@ -32,20 +35,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
-function closePopup(event) {
-    if (event && event.target !== document.querySelector('.popup-content') && !document.querySelector('.popup-content').contains(event.target)) {
-        document.getElementById('win-condition-popup').style.display = 'none';
-    } else if (!event) {
-        document.getElementById('win-condition-popup').style.display = 'none';
+// ----------------- Handle the player state information -----------------
+
+function togglePlayerState(playerNum) {
+    // Only 2 players can be players in a 4 player game
+    // Only 1 player can be a player in a 3 player game
+    if (!playerIsPlayer[playerNum - 1] &&
+        (playerIsPlayer.filter(p => p).length >= maxAllowedPlayers)) {
+        return;
+    }
+
+    playerIsPlayer[playerNum - 1] = !playerIsPlayer[playerNum - 1];
+    colorPlayer(playerNum);
+}
+
+function resetPlayerIsPlayer() {
+    playerIsPlayer = [false, false, false, false];
+    for(let i = 1; i <= 4; i++) {
+        colorPlayer(i);
     }
 }
 
-function showWinConditionPopup(event) {
-    event.preventDefault();
-    if(playerIsPlayer.filter(p => p).length === maxAllowedPlayers) {
-        document.getElementById('win-condition-popup').style.display = 'block';
+function updatePlayType() {
+    resetPlayerIsPlayer();
+    const playType = document.getElementById('play-type').value;
+    if (playType === 'Ruf') {
+        maxAllowedPlayers = 2;
+    }
+    else {
+        maxAllowedPlayers = 1;
     }
 }
+
 
 function handlePlayerSelection(event) {
     if(event.target.options[0].value === "") {
@@ -72,29 +93,14 @@ function handlePlayerSelection(event) {
     });
 }
 
-function togglePlayerState(playerNum) {
-    // Only 2 players can be players in a 4 player game
-    // Only 1 player can be a player in a 3 player game
-    if (!playerIsPlayer[playerNum - 1] &&
-        (playerIsPlayer.filter(p => p).length >= maxAllowedPlayers)) {
-        return;
-    }
 
-    playerIsPlayer[playerNum - 1] = !playerIsPlayer[playerNum - 1];
-    colorPlayer(playerNum);
-}
+// ----------------- Handle the UI -----------------
+/*
+    This function initializes the main player selection screen.
+    Depending on the selected number of players, this will show 3 or 4 players.
 
-function colorPlayer(playerNum) {
-    const player = document.getElementById(`player${playerNum}`);
-    if (playerIsPlayer[playerNum - 1]) {
-        player.style.backgroundColor = '#D4EDDA';
-    }
-    else {
-        player.style.backgroundColor = '#F0F0F0';
-    }
-}
-
-
+    It also initializes the play-type selection button based on the number of players.
+*/
 function showPlayersScreen(numPlayers) {
     globalNumPlayers = numPlayers; 
     document.getElementById('player-selection').style.display = 'none';
@@ -128,24 +134,40 @@ function showPlayersScreen(numPlayers) {
     resetPlayerIsPlayer();
 }
 
-function resetPlayerIsPlayer() {
-    playerIsPlayer = [false, false, false, false];
-    for(let i = 1; i <= 4; i++) {
-        colorPlayer(i);
-    }
-}
-
-function updatePlayType() {
-    resetPlayerIsPlayer();
-    const playType = document.getElementById('play-type').value;
-    if (playType === 'Ruf') {
-        maxAllowedPlayers = 2;
+function colorPlayer(playerNum) {
+    const player = document.getElementById(`player${playerNum}`);
+    if (playerIsPlayer[playerNum - 1]) {
+        player.style.backgroundColor = '#D4EDDA';
     }
     else {
-        maxAllowedPlayers = 1;
+        player.style.backgroundColor = '#F0F0F0';
     }
 }
 
+// ----------------- Handle the win condition popup -----------------
+
+function closePopup(event) {
+    if (event && event.target !== document.querySelector('.popup-content') && !document.querySelector('.popup-content').contains(event.target)) {
+        document.getElementById('win-condition-popup').style.display = 'none';
+    } else if (!event) {
+        document.getElementById('win-condition-popup').style.display = 'none';
+    }
+}
+
+function showWinConditionPopup(event) {
+    event.preventDefault();
+    if(playerIsPlayer.filter(p => p).length === maxAllowedPlayers) {
+        document.getElementById('win-condition-popup').style.display = 'block';
+    }
+}
+
+/*
+    Get the data from the buttons and send it to the server. 
+    Called when the win condition popup is submitted.
+
+    The data is sent in the following format:
+
+*/
 function submitForm(event) {
     const playType = document.getElementById('play-type').value;
     const winCondition = document.querySelector('input[name="wincondition"]:checked').value;
@@ -199,6 +221,11 @@ function submitForm(event) {
     resetPlayerIsPlayer();
 }
 
+// ----------------- Custom HTML elements -----------------
+/*
+    Show a custom alert message for 3 seconds. The alert will fade in and out.
+    The UI will still be clickable while the alert is shown.
+*/
 function showCustomAlert(message) {
     const alertBox = document.createElement('div');
     alertBox.className = 'custom-alert';

@@ -209,6 +209,23 @@ select.active {
     transform: translateX(-50%) translateY(-10px);
 }
 
+.banner {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 15px;
+}
+
+.banner .icon {
+    width: 30px;
+    height: 30px;
+}
+
 @media (max-width: 600px) {
     .container {
         width: 100%;

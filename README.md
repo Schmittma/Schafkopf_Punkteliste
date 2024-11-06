@@ -23,6 +23,8 @@ The Front-End issues REST calls to the server which then interacts with a Google
 ## REST API
 ### Endpoint /users
 
+### Endpoint /sheet
+
 ### Endpoint /gspielt
 
 4 Spieler Spiel:

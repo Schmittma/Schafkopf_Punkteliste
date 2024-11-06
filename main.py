@@ -18,6 +18,10 @@ config_sheet = spreadsheet.worksheet("Konfiguration")
 playsheet_4p = spreadsheet.worksheet("Spielhistorie 4P")
 playsheet_3p = spreadsheet.worksheet("Spielhistorie 3P")
 
+@app.route('/sheet', methods=['GET'])
+def get_sheet_link():
+    return jsonify({"link": f"https://docs.google.com/spreadsheets/d/{SERVER_CONFIG['spreadsheet_id']}"})
+
 @app.route('/users', methods=['GET'])
 def get_users():
     # Fetch all values from the "Spieler" column

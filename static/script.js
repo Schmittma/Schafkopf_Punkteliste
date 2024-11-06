@@ -33,6 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 select.addEventListener('change', handlePlayerSelection);
             });
         });
+    
+    fetch('/sheet')
+        .then(response => response.json())
+        .then(data => {
+            const sheetLink = document.getElementById('banner__sheet-link');
+            sheetLink.href = data.link;
+        });
 });
 
 // ----------------- Handle the player state information -----------------

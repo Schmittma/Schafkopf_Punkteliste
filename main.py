@@ -55,29 +55,33 @@ def add_score():
     
     new_row = [data['play'], data['winner'], data['wincondition'], data['running']]
     
-    if  len(data['participants']) == 4:
-        new_row.extend(players)
-        new_row.extend([''] * (2 - len(players)))
+    try:
+        if  len(data['participants']) == 4:
+            new_row.extend(players)
+            new_row.extend([''] * (2 - len(players)))
+            
+            new_row.extend(non_players)
+            new_row.extend([''] * (4 - len(non_players)))
+            
+            new_row.append(date)
+            
+            playsheet_4p.append_row(new_row)
+            
+        else:
+            new_row.extend(players)
+            new_row.extend([''] * (1 - len(players)))
+            
+            new_row.extend(non_players)
+            new_row.extend([''] * (3 - len(non_players)))
+            
+            new_row.append(date)
+            
+            playsheet_3p.append_row(new_row)
         
-        new_row.extend(non_players)
-        new_row.extend([''] * (4 - len(non_players)))
-        
-        new_row.append(date)
-        
-        playsheet_4p.append_row(new_row)
-        
-    else:
-        new_row.extend(players)
-        new_row.extend([''] * (1 - len(players)))
-        
-        new_row.extend(non_players)
-        new_row.extend([''] * (3 - len(non_players)))
-        
-        new_row.append(date)
-        
-        playsheet_3p.append_row(new_row)
-    
-    return jsonify({"status": "success"}), 201
+        return jsonify({"status": "success"}), 201
+    except Exception as e:
+        print(e)
+        return jsonify({"status": "error", "message": "Server error. Play was not submitted."}), 500
 
 @app.route('/')
 def index():

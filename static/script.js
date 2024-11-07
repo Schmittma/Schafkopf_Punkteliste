@@ -211,6 +211,10 @@ function showWinConditionPopup(event) {
 
         document.getElementById('win-condition-popup').style.display = 'block';
     }
+    else
+    {
+        showCustomAlert('Klick auf die Icons um festzulegen wer spielt!', '#e8dd43', 2500);
+    }
 }
 
 /*
@@ -262,7 +266,7 @@ function submitForm(event) {
     }
 
     if (!valid) {
-        alert('Ungültige Spieler ausgewählt');
+        showCustomAlert('Fehler: Ungültige Spieler ausgewählt', '#ff7f7f', 5000);
         document.getElementById('win-condition-popup').style.display = 'none';
         return;
     }
@@ -285,9 +289,9 @@ function submitForm(event) {
     .then(response => response.json())
     .then(result => {
         if (result.status === 'success') {
-            showCustomAlert('Spiel eingetragen!');
+            showCustomAlert('Spiel eingetragen!', '#80e177', 3000);
         } else {
-            alert('Error: ' + result.message);
+            showCustomAlert('Fehler: ' + result.message, '#ff7f7f', 5000);
         }
     })
     .catch(error => {
@@ -305,9 +309,10 @@ function submitForm(event) {
     Show a custom alert message for 3 seconds. The alert will fade in and out.
     The UI will still be clickable while the alert is shown.
 */
-function showCustomAlert(message) {
+function showCustomAlert(message, color, duration) {
     const alertBox = document.createElement('div');
     alertBox.className = 'custom-alert';
+    alertBox.style.backgroundColor = color;
     alertBox.textContent = message;
     document.body.appendChild(alertBox);
 
@@ -319,5 +324,5 @@ function showCustomAlert(message) {
         setTimeout(() => {
             document.body.removeChild(alertBox);
         }, 300);
-    }, 3000);
+    }, duration);
 }

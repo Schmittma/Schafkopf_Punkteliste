@@ -191,8 +191,8 @@ select.active {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #80e177;
     color: #000000;
+    white-space: pre-line;
     padding: 10px 20px;
     border-radius: 25px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

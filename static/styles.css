@@ -48,6 +48,10 @@ button:active {
     transform: translateY(0);
 }
 
+#submit-play-button {
+    margin-top: 30px;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -73,13 +77,6 @@ select {
     transition: border-color 0.3s ease;
     text-align: center; /* Center the text */
     text-align-last: center; /* Center the text for the last line */
-}
-
-select#play-type {
-    max-width: 150px; /* Adjust the max-width for play-type */
-    padding: 15px 10px; /* Increase height by adjusting padding */
-    margin-bottom: 20px; /* Add space between play-type and other selectors */
-    font-size: 24px; /* Increase font size for play-type */
 }
 
 select.player-select {
@@ -224,6 +221,52 @@ select.active {
 .banner .icon {
     width: 30px;
     height: 30px;
+}
+
+.play-type-and-running-counter-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+select#play-type {
+    max-width: 150px; /* Adjust the max-width for play-type */
+    padding: 15px 10px; /* Increase height by adjusting padding */
+    margin-right: 20px;
+    font-size: 24px; /* Increase font size for play-type */
+}
+
+#running-counter-text {
+    font-size: 24px;
+    text-align: center;
+    Margin: 0px;
+}
+
+.running-counter-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+#running-counter-value {
+    margin: 0 10px;
+    font-size: 24px;
+}
+
+.running-counter-button {
+    cursor: pointer;
+    font-size: 28px;
+    padding: 0 10px;
+    user-select: none;
+    color: #007bff;
+    text-decoration: none;
+    border: none;
+    background: none;
+    margin: 0 5px;
+}
+
+.running-counter-button:hover {
+    color: #0056b3;
 }
 
 @media (max-width: 600px) {

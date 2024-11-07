@@ -33,6 +33,7 @@ The Front-End issues REST calls to the server which then interacts with a Google
     "play": "Ruf" | "Solo" | "Ramsch",
     "winner": "spieler" | "Nicht-Spieler",
     "wincondition": "normal" | "schneider" | "schwarz",
+    "running": 0-8,
     "participants": [
         { "name": "Name player1>", "is_player": true },
         { "name": "Name player2>", "is_player": false },
@@ -48,6 +49,7 @@ The Front-End issues REST calls to the server which then interacts with a Google
     "play": "Solo" | "Ramsch",
     "winner": "spieler" | "nicht-spieler",
     "wincondition": "normal" | "schneider" | "schwarz",
+    "running": 0-8,
     "participants": [
         { "name": "Name player1", "is_player": true },
         { "name": "Name player2", "is_player": false },

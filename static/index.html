@@ -32,9 +32,19 @@
                     <img src="static/img/Schellen.png" class="toggle-button" onclick="togglePlayerState(4)">
                     <select id="player4" class="player-select" name="player4"></select>
                 </div>
-                <select id="play-type" name="play-type" onchange="updatePlayType()">
-                </select>
-                <button type="submit">Ergebnis Eintragen</button>
+                <div class="play-type-and-running-counter-container">
+                    <select id="play-type" name="play-type" onchange="updatePlayType()">
+                    </select>
+                    <div>
+                        <p id="running-counter-text">Laufende</p>
+                        <div class="running-counter-container">
+                            <span class="running-counter-button" onclick="decrementCounter()">-</span>
+                            <span id="running-counter-value">0</span>
+                            <span class="running-counter-button" onclick="incrementCounter()">+</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" id="submit-play-button">Ergebnis Eintragen</button>
             </form>
         </div>
     </div>

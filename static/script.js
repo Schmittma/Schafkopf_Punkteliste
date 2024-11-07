@@ -2,6 +2,7 @@
 let globalNumPlayers = 0;
 let maxAllowedPlayers = 0;
 let playerIsPlayer = [false, false, false, false];
+let runningCards = 0;
 
 
 // ----------------- Handle DOM Loaded -----------------
@@ -100,6 +101,26 @@ function handlePlayerSelection(event) {
     });
 }
 
+// ----------------- Handle running cards -----------------
+
+
+function incrementCounter() {
+    if(runningCards < 8) {
+        runningCards++;
+        updateCounter();
+    }
+}
+
+function decrementCounter() {
+    if (runningCards > 0) {
+        runningCards--;
+        updateCounter();
+    }
+}
+
+function updateCounter() {
+    document.getElementById('running-counter-value').innerText = runningCards;
+}   
 
 // ----------------- Handle the UI -----------------
 /*
@@ -250,6 +271,7 @@ function submitForm(event) {
         play: playType,
         winner: winner,
         wincondition: winCondition,
+        running: runningCards,
         participants: participants
     };
 
@@ -274,6 +296,8 @@ function submitForm(event) {
 
     document.getElementById('win-condition-popup').style.display = 'none';
     resetPlayerIsPlayer();
+    runningCards = 0;
+    updateCounter();
 }
 
 // ----------------- Custom HTML elements -----------------

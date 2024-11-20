@@ -288,3 +288,9 @@ select#play-type {
         font-size: 18px; /* Increase font size for readability */
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    img {
+        filter: none;
+    }
+}

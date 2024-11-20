@@ -53,7 +53,12 @@ def add_score():
     if len(players) > 2 or len(non_players) < 2:
         return jsonify({"status": "error", "message": "Invalid number of players or non-players"}), 400
     
-    new_row = [data['play'], data['winner'], data['wincondition'], data['running']]
+    running = data['running']
+    
+    if (data['play'] == 'Solo' and running < 2) or ((data['play'] == 'Ruf' or data['play'] == 'Ramsch') and running < 3):
+        running = 0
+    
+    new_row = [data['play'], data['winner'], data['wincondition'], running]
     
     try:
         if  len(data['participants']) == 4:

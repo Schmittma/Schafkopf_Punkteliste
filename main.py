@@ -70,7 +70,7 @@ def add_score():
             
             new_row.append(date)
             
-            playsheet_4p.append_row(new_row)
+            response = playsheet_4p.append_row(new_row)
             
         else:
             new_row.extend(players)
@@ -81,9 +81,14 @@ def add_score():
             
             new_row.append(date)
             
-            playsheet_3p.append_row(new_row)
+            response = playsheet_3p.append_row(new_row)
         
-        return jsonify({"status": "success"}), 201
+        if response['updates']['updatedRows'] != 1:
+            return jsonify({"status": "error", "message": "Server error. Play was not submitted."}), 500
+        else:             
+            return jsonify({"status": "success"}), 201
+        
+        
     except Exception as e:
         print(e)
         return jsonify({"status": "error", "message": "Server error. Play was not submitted."}), 500
